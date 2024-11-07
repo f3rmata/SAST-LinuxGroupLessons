@@ -137,17 +137,58 @@ layout: quote
 layout: quote
 ---
 
-## systemd
+## 从PID1说起
 
-要管理服务，首先我们要清楚系统内有哪些服务。可以通过 `systemctl status` 命令一览系统服务运行情况。  
+首先Linux内核启动，然后在用户空间中启动init进程，再启动其他系统进程。在系统启动完成完成后，init将变为守护进程监视系统其他进程。
 
-这里使用的是`less`翻页器~~支持j和k翻页，vim赛高~~
+- `SysV Init` --> `Systemd`
+- Unix 设计哲学—— “Do one thing and Do it well”
 
-<!-- 此处应该有图片 -->
+<!-- PID 1 这个进程非常特殊，其主要就任务是把整个操作系统带入可操作的状态。比如：启动 UI – Shell 以便进行人机交互，或者进入 X 图形窗口。传统上，PID 1 和传统的 Unix System V 相兼容的，所以也叫 sysvinit，这是使用得最悠久的 init 实现。Unix System V 于 1983 年 release。  
+但是由于各种历史包袱，SysV Init显现出了各种缺点：慢，拓展性差，后人在前人的基础上进行了各种改进，比如Upstart。但是，在2010这一年，Systemd他来了...  
+Systemd可以说是管理系统全能的工具。d一般来说指的是daemon，也就是守护进程。顾名思义，Systemd想做的就是守护整个系统。
+但是很多人不同意，对于把一件事情做好来说，Systemd干的事情太多了：systemctl, journalctl, localectl, timedatectl...所以面世以来产生了不少争议，我认为这是有进步的，你们觉得呢？-->
 
-## 让TLDR来告诉我们怎么用吧
+---
+layout: quote
+---
 
-<!-- 此处应该有图片 -->
+## Systemd
+
+Systemd 可以管理所有系统资源。不同的资源统称为 Unit（单位）。我们后面会看到的Target，其实是各种的Unit构成的组。
+
+- 查看系统服务运行情况: `systemctl status`
+- 查看某个服务最后的日志: `journalctl -eu <单元名>`
+  - `-e`: 滚动到底部
+  - ·-u`: 后面跟上单元名
+  - 当然可以用`--since`和`--until`来指定某个时间段的日志，具体的可以在man里面查看。
+
+<!-- 此要管理服务，首先我们要清楚系统内有哪些服务。这里使用的是`less`翻页器~~支持j和k翻页，vim赛高~~  
+如果作为服务启动，通常日志都不会给到标准输出上。 -->
+
+---
+layout: quote
+---
+
+## 创建一个自己的服务！
+
+包括三个节：[Unit], [Service], [Install]
+一个简单的示例：
+
+```ini
+[Unit]
+Requires=network.target
+Description=
+
+[Service]
+ExecStart=/usr/bin/<...>
+ExecStop=kill -9 $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+```
+
+后续我们会用一些服务来讲解~
 
 ---
 layout: quote
@@ -271,3 +312,220 @@ drwxr-xr-x  3 texsd texsd 4.0K  9月15日 20:47 .zim
 
 - 第二位指的是硬链接数。
 - 第三位，第四位分别是所有者，所有组；分别用`chown``chgrp`修改。
+
+---
+layout: quote
+---
+
+## 配置一个C语言环境
+
+赶紧掏出我们那具有**超级牛力**的apt吧：
+
+```shell
+sudo apt install build-essential
+```
+
+然后试试gcc:
+
+```shell
+gcc -v
+```
+
+<!-- 这里的build-essential包含了编译需要的很多工具 -->
+
+---
+layout: quote
+---
+
+## 了解编译的过程
+
+当我们要完成大型项目的时候，makefile是我们的得力助手，它定义了哪些文件需要编译，编译的顺序以及编译的依赖关系。
+
+```makefile
+main: fun.o main.o
+g++ -Wall fun.o main.o -o main
+
+main.o: main.cpp
+g++ -Wall -c main.cpp -o main.o
+
+fun.o: fun.cpp fun.h
+g++ -Wall -c fun.cpp -o fun.o
+
+.PHONY: clean
+clean:
+rm *.o
+```
+
+<!-- 将目标文件 fun.o 和 main.o 链接为可执行文件 main。-Wall 参数启用所有警告，帮助识别潜在错误。最终生成的可执行文件为 main。  
+将 main.cpp 编译为目标文件 main.o。-c 表示只编译不链接。-Wall 会启用所有编译警告。  
+将 fun.cpp 编译为目标文件 fun.o，依赖头文件 fun.h。-c 表示不进行链接，仅生成目标文件。-Wall 用于开启警告。  
+声明 clean 为伪目标，用于清理编译生成的文件。运行时会删除所有 .o 文件和 main 可执行文件。 -->
+
+---
+layout: quote
+---
+
+## 探测内存泄漏
+
+对于C/C++来说，内存泄漏是个问题，我们在Linux上可以用valgrind来探测。
+写一个带malloc的c程序，但是不释放：
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+void memoryLeakExample() {
+    int* leakyArray = (int*)malloc(10 * sizeof(int));  // 动态分配内存
+    for (int i = 0; i < 10; ++i) {
+        leakyArray[i] = i;
+    }
+    // 未释放 leakyArray，造成内存泄漏
+}
+
+int main() {
+    memoryLeakExample();
+    return 0;
+}
+```
+
+---
+layout: quote
+---
+
+使用gcc编译：`gcc -Wall -g leak.c -o leak`  
+使用`valgrind --leak-check=full ./leak`，valgrind会输出：  
+
+```shell
+...
+==10612== 40 bytes in 1 blocks are definitely lost in loss record 1 of 1
+==10612==    at 0x4C2B9BB: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==10612==    by 0x10916A: memoryLeakExample (leak.c:5)
+==10612==    by 0x109189: main (leak.c:11)
+...
+==10612== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+```
+
+添加`free(leakyArray); `
+
+```shell
+...
+==10612== All heap blocks were freed -- no leaks are possible.
+...
+==10612== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+```
+
+此时内存泄漏就被解决了。
+
+---
+layout: quote
+---
+
+# 搭建MC服务器
+
+1. 我们选择用java版，所以先安装jdk：
+
+```shell
+sudo apt install sudo apt install openjdk-21-jdk-headless
+```
+
+    确认安装：
+
+```shell
+java -v
+```
+
+2. 创建一个跑mc服务器的用户：
+
+```shell
+useradd -m -r -s /bin/bash minecraft
+sudo -i
+su -- minecraft
+cd ~
+```
+
+3. 从[mcversions](https://mcversions.net/download/1.21.1)下载服务端二进制文件。
+
+```shell
+mkdir server && cd server
+wget https://piston-data.mojang.com/v1/objects/59353fb40c36d304f2035d51e7d6e6baa98dc05c/server.jar
+```
+
+---
+layout: quote
+---
+
+4. 先运行并同意EULA。
+
+```shell
+java -jar server.jar # 等一会会自动退出
+vim eula.txt #把true改成false
+vim server.properties # 把online-mode这一项后面改成false(关闭验证)
+# 不会的小柚子可以把vim换成nano，界面上会有提示的~我们后面也会教大家的
+```
+
+5. 查看自己网卡接口地址，再次启动验证。
+
+```shell
+ifconfig
+java -jar server.jar
+```
+
+此时应该能运行了。
+
+---
+layout: quote
+---
+
+*6. 创建一个服务，开机自动启动mc服务器。
+
+按下两次Ctrl + D回到自己的用户，然后
+
+`sudo vim /etc/systemd/system/mc-server.service`
+
+写下：
+
+```ini
+[Unit]
+Description=Minecraft Server
+After=network.target
+
+[Service]
+User=minecraft
+Group=minecraft
+WorkingDirectory=/home/minecraft/server
+ExecStart=/usr/bin/java -jar /home/minecraft/server/server.jar nogui
+ExecStop=/bin/kill -9 $MAINPID | echo $MAINPID
+
+[Install]
+WantedBy=multi-user.target
+```
+
+---
+layout: quote
+---
+
+重载systemd配置文件：
+```shell
+sudo systemctl daemon-reload
+sudo systemctl enable mc-server --now
+```
+
+现在就可以愉快的玩耍啦！
+
+---
+layout: quote
+---
+
+## 参考资料
+
+- [Linux101](https://101.lug.ustc.edu.cn/)
+- [进程和线程有什么区别？](https://www.zhihu.com/question/21535820/answer/411196449)
+- [Systemd 入门教程：命令篇](https://ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html)
+- [LINUX PID 1和SYSTEMD 专题](https://www.cnblogs.com/softidea/p/7219455.html)
+- [教程:架设Java版服务器](https://zh.minecraft.wiki/w/Tutorial:%E6%9E%B6%E8%AE%BEJava%E7%89%88%E6%9C%8D%E5%8A%A1%E5%99%A8?variant=zh-cn#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83)
+
+---
+layout: end
+---
+
+Thanks!
