@@ -591,12 +591,6 @@ layout: quote
 sudo apt install openjdk-21-jdk-headless tmux
 ```
 
-<!-- 我要记得装vim！！  
-把下面的发到群里：  
-https://mcversions.net/download/1.21.1  
-wget https://piston-data.mojang.com/v1/objects/59353fb40c36d304f2035d51e7d6e6baa98dc05c/server.jar  
- -->
-
     确认安装：
 
 ```shell
@@ -612,12 +606,21 @@ su -- mc
 cd ~
 ```
 
-3. 从[mcversions](https://mcversions.net/download/1.21.1)下载服务端二进制文件。
+3. 从[官方](https://www.minecraft.net/zh-hans/download/server)下载服务端二进制文件。
 
 ```shell
 mkdir server && cd server
-wget https://piston-data.mojang.com/v1/objects/59353fb40c36d304f2035d51e7d6e6baa98dc05c/server.jar
+wget https://piston-data.mojang.com/v1/objects/45810d238246d90e811d896f87b14695b7fb6839/server.jar
 ```
+
+<!--
+我要记得装vim！！  
+把下面的发到群里：  
+命令行：
+wget https://piston-data.mojang.com/v1/objects/45810d238246d90e811d896f87b14695b7fb6839/server.jar
+不行的话手动下载：
+https://www.minecraft.net/zh-hans/download/server
+-->
 
 ---
 layout: quote
@@ -631,8 +634,6 @@ nano eula.txt #把true改成false
 nano server.properties # 把online-mode这一项后面改成false(关闭验证)
 ```
 
-<!-- 一个用nano另一个用vim -->
-
 5. 查看自己网卡接口地址，再次启动验证。
 
 ```shell
@@ -641,6 +642,8 @@ java -Xms1024M -Xmx2048M -jar server.jar --nogui
 ```
 
 此时应该能运行了。
+
+<!-- 一个用nano另一个用vim -->
 
 ---
 layout: quote
