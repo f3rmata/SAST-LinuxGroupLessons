@@ -663,6 +663,145 @@ java -Xms1024M -Xmx2048M -jar server.jar --nogui
 layout: quote
 ---
 
+# 搭建个人博客
+
+## 搭建环境
+
+前面的课程知识点十分密集，专业术语也非常多，接下来来一些简洁直观的内容吧 ~~
+
+博客是一个很好的展示自己，记录生活，分享知识的地方，我们身边很多大佬都有自己的博客，常阅读可以丰富我们的知识面。
+
+比如橙子学长的博客 [萤火之光](https://alampy.com/) 就是一个相当高质量的博客。
+
+我也有我自己的博客 [树 - 洞](https://blog.insmtr.cn/) 。
+
+既然我们已经掌握了 Linux 的基本操作了，那么我们不妨尝试搭建一个属于自己的博客。
+
+---
+layout: quote
+---
+
+## 搭建环境
+
+1. 市面上有许多成熟的开源博客框架，比如 Hexo、Jekyll、Hugo 等，我们以 Hexo 为例搭建一个简单的博客。
+
+2. 安装 Node.js
+
+```shell
+$ sudo apt update
+$ sudo apt install curl
+$ curl -o- https://ghp.ci/https://github.com/nvm-sh/nvm/raw/refs/heads/master/install.sh | bash
+$ source ~/.bashrc
+$ nvm install 20
+$ npm config set registry https://repo.nju.edu.cn/repository/npm/
+```
+
+3. 安装 Hexo
+
+```shell
+npm install -g hexo-cli
+```
+
+4. 初始化博客
+
+```shell
+$ hexo init blog
+$ cd blog
+$ npm install
+```
+
+---
+layout: quote
+---
+
+## 搭建环境
+
+5. 启动博客
+
+```shell
+$ hexo server
+```
+
+6. 在虚拟机浏览器内访问 `http://localhost:4000` 即可看到博客页面。  
+   同样，在物理机浏览器内访问 `http://<虚拟机IP>:4000` 也可以看到博客页面。
+
+---
+layout: quote
+---
+
+## 切换主题
+
+默认的主题还是太难看了，我们可以选择一个更好看的主题。
+
+Hexo 主题是开放的，任何人都可以开发自己的主题，也可以使用别人开发的主题。
+
+我们可以在 [Hexo 主题官网](https://hexo.io/themes/) 上找到适合自己的主题，比如 [hexo-theme-icarus](https://github.com/ppoffice/hexo-theme-icarus) 。
+
+下载主题并应用：
+
+```shell
+$ npm install hexo-theme-icarus
+$ hexo config theme icarus
+$ hexo server
+```
+
+---
+layout: quote
+---
+
+## 开始写作
+
+1. 创建一篇新文章
+
+```shell
+$ hexo new "Hello World"
+```
+
+2. 编辑文章
+
+在 `source/_posts` 目录下找到 `Hello World.md` 文件，编辑文章内容。
+
+```shell
+$ nano "source/_posts/Hello World.md"
+```
+
+3. 预览文章
+
+```shell
+$ hexo serve
+```
+
+你已经成功搭建了一个属于自己的博客！
+
+---
+layout: quote
+---
+
+## 编译
+
+此时我们的博客还只是必须在命令行中输入命令启动，这样子服务效率低下。而且这些网页都是固定不变的，我们可以将博客编译成静态文件，然后上传到服务器上。
+
+```shell
+hexo generate
+```
+
+在 `public` 目录下生成了静态文件，我们可以将这些文件上传到服务器上，然后使用 Nginx 或 Apache 等 Web 服务器进行部署。
+
+在本地，我们可以借助 Python 的 http.server 模块来预览编译后的博客。
+
+```shell
+cd public
+python3 -m http.server 8080
+```
+
+在浏览器中访问 `http://localhost:8080` 即可预览编译后的博客。
+
+事实上，国外有一些免费的静态网站托管服务，比如 GitHub Pages、Netlify、Cloudflare Pages 等，我们可以将编译后的博客上传到这些平台上，实现免费的博客托管。这样，我们就可以在全世界范围内访问我们的博客了。
+
+---
+layout: quote
+---
+
 ## 参考资料
 
 - [USTC Linux101](https://101.lug.ustc.edu.cn/)
