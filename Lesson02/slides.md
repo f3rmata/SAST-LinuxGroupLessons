@@ -427,7 +427,7 @@ layout: quote
 1. 我们选择用java版，所以先安装jdk：
 
 ```shell
-sudo apt install openjdk-21-jdk-headless
+sudo apt install openjdk-21-jdk-headless tmux
 ```
 
 <!-- 我要记得装vim！！  
@@ -485,43 +485,15 @@ java -Xms1024M -Xmx2048M -jar server.jar --nogui
 layout: quote
 ---
 
-*6. 创建一个服务，开机自动启动mc服务器。
+6. 使用tmux开启服务器
 
-接上面，输入`stop`返回shell。  
-按下两次Ctrl + D回到自己的用户，然后
-
-`sudo nano /etc/systemd/system/mc-server.service`
-
-写下：
-
-```ini
-[Unit]
-Description=Minecraft Server
-After=network.target
-
-[Service]
-User=mc
-Group=mc
-WorkingDirectory=/home/mc/server
-ExecStart=/usr/bin/java -Xms1024M -Xmx2048M -jar /home/mc/server/server.jar nogui
-ExecStop=/bin/kill -9 $MAINPID | echo $MAINPID
-
-[Install]
-WantedBy=multi-user.target
-```
-
----
-layout: quote
----
-
-重载systemd配置文件：
 ```shell
-sudo systemctl daemon-reload
-sudo systemctl enable mc-server --now
-sudo systemctl status mc-server.service # 查看运行情况
+tmux
+java -Xms1024M -Xmx2048M -jar server.jar --nogui
 ```
 
-现在就可以愉快的玩耍啦！
+`ctrl + b``d`返回shell  
+现在可以安全的关闭ssh连接了！(服务器版)
 
 ---
 layout: quote
