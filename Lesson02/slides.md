@@ -665,6 +665,10 @@ layout: quote
 
 # 搭建个人博客
 
+---
+layout: quote
+---
+
 ## 搭建环境
 
 前面的课程知识点十分密集，专业术语也非常多，接下来来一些简洁直观的内容吧 ~~
@@ -699,7 +703,7 @@ $ npm config set registry https://repo.nju.edu.cn/repository/npm/
 3. 安装 Hexo
 
 ```shell
-npm install -g hexo-cli
+$ npm install -g hexo-cli
 ```
 
 4. 初始化博客
@@ -782,7 +786,7 @@ layout: quote
 此时我们的博客还只是必须在命令行中输入命令启动，这样子服务效率低下。而且这些网页都是固定不变的，我们可以将博客编译成静态文件，然后上传到服务器上。
 
 ```shell
-hexo generate
+$ hexo generate
 ```
 
 在 `public` 目录下生成了静态文件，我们可以将这些文件上传到服务器上，然后使用 Nginx 或 Apache 等 Web 服务器进行部署。
@@ -790,8 +794,8 @@ hexo generate
 在本地，我们可以借助 Python 的 http.server 模块来预览编译后的博客。
 
 ```shell
-cd public
-python3 -m http.server 8080
+$ cd public
+$ python3 -m http.server 8080
 ```
 
 在浏览器中访问 `http://localhost:8080` 即可预览编译后的博客。
