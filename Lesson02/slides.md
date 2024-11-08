@@ -310,8 +310,10 @@ drwxr-xr-x  3 texsd texsd 4.0K  9月15日 20:47 .zim
   - 第三位 x 代表执行 (Execute) - 1  
   - `-` 代表没有对应的权限。
 
+  要修改它们，使用`chmod <644|755|600> <文件>`修改。
+
 - 第二位指的是硬链接数。
-- 第三位，第四位分别是所有者，所有组；分别用`chown``chgrp`修改。
+- 第三位，第四位分别是所有者，所有组；分别用`chown``chgrp`修改，这两个后面都先跟着用户名/组名，然后再接着文件。
 
 ---
 layout: quote
@@ -425,21 +427,27 @@ layout: quote
 1. 我们选择用java版，所以先安装jdk：
 
 ```shell
-sudo apt install sudo apt install openjdk-21-jdk-headless
+sudo apt install openjdk-21-jdk-headless
 ```
+
+<!-- 我要记得装vim！！  
+把下面的发到群里：  
+https://mcversions.net/download/1.21.1  
+wget https://piston-data.mojang.com/v1/objects/59353fb40c36d304f2035d51e7d6e6baa98dc05c/server.jar  
+ -->
 
     确认安装：
 
 ```shell
-java -v
+java --version
 ```
 
 2. 创建一个跑mc服务器的用户：
 
 ```shell
-useradd -m -r -s /bin/bash minecraft
+useradd -m -r -s /bin/bash mc
 sudo -i
-su -- minecraft
+su -- mc
 cd ~
 ```
 
@@ -458,16 +466,17 @@ layout: quote
 
 ```shell
 java -jar server.jar # 等一会会自动退出
-vim eula.txt #把true改成false
-vim server.properties # 把online-mode这一项后面改成false(关闭验证)
-# 不会的小柚子可以把vim换成nano，界面上会有提示的~我们后面也会教大家的
+nano eula.txt #把true改成false
+nano server.properties # 把online-mode这一项后面改成false(关闭验证)
 ```
+
+<!-- 一个用nano另一个用vim -->
 
 5. 查看自己网卡接口地址，再次启动验证。
 
 ```shell
-ifconfig
-java -jar server.jar
+ip addr
+java -Xms1024M -Xmx2048M -jar server.jar --nogui
 ```
 
 此时应该能运行了。
@@ -478,9 +487,10 @@ layout: quote
 
 *6. 创建一个服务，开机自动启动mc服务器。
 
+接上面，输入`stop`返回shell。  
 按下两次Ctrl + D回到自己的用户，然后
 
-`sudo vim /etc/systemd/system/mc-server.service`
+`sudo nano /etc/systemd/system/mc-server.service`
 
 写下：
 
@@ -490,10 +500,10 @@ Description=Minecraft Server
 After=network.target
 
 [Service]
-User=minecraft
-Group=minecraft
-WorkingDirectory=/home/minecraft/server
-ExecStart=/usr/bin/java -jar /home/minecraft/server/server.jar nogui
+User=mc
+Group=mc
+WorkingDirectory=/home/mc/server
+ExecStart=/usr/bin/java -Xms1024M -Xmx2048M -jar /home/mc/server/server.jar nogui
 ExecStop=/bin/kill -9 $MAINPID | echo $MAINPID
 
 [Install]
@@ -508,6 +518,7 @@ layout: quote
 ```shell
 sudo systemctl daemon-reload
 sudo systemctl enable mc-server --now
+sudo systemctl status mc-server.service # 查看运行情况
 ```
 
 现在就可以愉快的玩耍啦！
@@ -518,7 +529,7 @@ layout: quote
 
 ## 参考资料
 
-- [Linux101](https://101.lug.ustc.edu.cn/)
+- [USTC Linux101](https://101.lug.ustc.edu.cn/)
 - [进程和线程有什么区别？](https://www.zhihu.com/question/21535820/answer/411196449)
 - [Systemd 入门教程：命令篇](https://ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html)
 - [LINUX PID 1和SYSTEMD 专题](https://www.cnblogs.com/softidea/p/7219455.html)
