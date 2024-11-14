@@ -334,7 +334,7 @@ layout: quote
 
 ![passwd](/passwd.png)
 
-`/etc/groups`
+`/etc/shadow`
 
 ![shadow](/shadow.png)
 
@@ -600,7 +600,7 @@ java --version
 2. 创建一个跑mc服务器的用户：
 
 ```shell
-useradd -m -r -s /bin/bash mc
+sudo useradd -m -r -s /bin/bash mc
 sudo -i
 su -- mc
 cd ~
@@ -634,16 +634,15 @@ nano eula.txt #把true改成false
 nano server.properties # 把online-mode这一项后面改成false(关闭验证)
 ```
 
-5. 查看自己网卡接口地址，再次启动验证。
+5. 查看自己网卡接口地址。
 
 ```shell
 ip addr
-java -Xms1024M -Xmx2048M -jar server.jar --nogui
 ```
 
-此时应该能运行了。
-
-<!-- 一个用nano另一个用vim -->
+<!--
+一个用nano另一个用vim
+-->
 
 ---
 layout: quote
