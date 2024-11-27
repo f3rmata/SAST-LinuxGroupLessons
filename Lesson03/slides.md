@@ -53,6 +53,11 @@ layout: quote
 Vi/Vim 操作的核心在于它的模式化设计，以及它极为高效的键盘快捷键。这种方式强调在不离开键盘的情况下，快速执行各种操作，而不是频繁切换到鼠标或其他输入方式。
 现在的服务器上，基本都会预装Vi编辑器。我们需要ssh进服务器临时修改一些配置文件的时候，Vi是一个不错的选择。
 
+
+---
+layout: quote
+---
+
 # Vim的三个模式
 
 - 普通模式: 通过motion和operator进行各种操作
@@ -64,6 +69,10 @@ layout: quote
 ---
  
 # 开始我们的Vim旅程！
+
+安装gvim: sudo apt install gvim
+
+> 原版vim有一些小bug,这里我们用gvim
 
 最佳入门教程: `vimtutor`
 
@@ -79,7 +88,7 @@ layout: quote
 
 # Vim配置
 
-> 免责声明：这里仅代表个人配置，可能不适用于所有人，根据自己爱好调整即可。
+> 这里仅代表个人配置，可能不适用于所有人，根据自己爱好调整即可。
 
 ```shell
 set ignorecase
@@ -94,3 +103,26 @@ set cindent
 
 inoremap jj <ESC>
 ```
+
+---
+layout: quote
+---
+
+# Vim的寄存器
+
+我们前面学习到的operator: d, c, x，本质上不是真正把他们删除，而是相当于剪切。
+
+使用`:reg`来查看所有的寄存器，我们上面提到的命令，会把删掉的内容放到未命名剪贴板""里面。
+
+我们操作的时候可以指定寄存器，只需要先输入`"<寄存器名称>`再按我们之前的用法输入即可。
+
+
+---
+layout: quote
+---
+
+# Vim 和 VSCode结合
+
+vim插件:
+
+![插件](./public/vim-extension.png)
