@@ -1,7 +1,6 @@
 #+title: Church of Emacs!
 
 * 什么是 Emacs？
-
 [[https://www.gnu.org/software/emacs/tour/index.html][Emacs 官网]]
 
 *它是一个伪装成文本编辑器的操作系统！*
@@ -52,27 +51,28 @@ Emacs 诞生已有近五十年时间，是世界上最古老而依然活跃（�
 :PROPERTIES:
 :ID:       6a53599c-249c-48c5-958c-2acdfe32cfb4
 :END:
-特点：
-- 功能全面，几乎是一个“操作系统级”的编辑器，可以运行邮箱客户端、RSS 阅读器，甚至玩游戏。
++ 特点：
+  - 功能全面，几乎是一个“操作系统级”的编辑器，可以运行邮箱客户端、RSS 阅读器，甚至玩游戏。
+    +事实上，你也完全可以在 Emacs 的终端中运行一个 vim （+
 
-用户界面：
-- Emacs，最初也为终端设计。作为早期 Lisp 机器遗留下来的产物，它只提供了纯文本界面。
-  从 Emacs 18 开始支持 X11 GUI，并且在 Emacs 19 成为默认支持的界面。现在的 Emacs 完全支持等距字体，支持字号的变化，而且支持文档内嵌图象和超级链接。
+ - 用户界面：
+   - Emacs，最初也为终端设计。作为早期 Lisp 机器遗留下来的产物，它只提供了纯文本界面。
+     从 Emacs 18 开始支持 X11 GUI，并且在 Emacs 19 成为默认支持的界面。现在的 Emacs 完全支持等距字体，支持字号的变化，而且支持文档内嵌图象和超级链接。
 
-语言支持：
-- Emacs 支持所有兼容 Unicode 的语言。
-- Emacs 可以实现中英文自动空格功能。
-- Emacs 支持在编辑器内调用 rime 输入法。
+ - 语言支持：
+   - Emacs 支持所有兼容 Unicode 的语言。
+   - Emacs 可以实现中英文自动空格功能。
+   - Emacs 支持在编辑器内调用 rime 输入法。
 
-可扩展与定制化：
-- 事实上极强的可扩展性才是我认为的 Emacs 最核心的竞争力，前面两个优势归根结底也都是可扩展性带来的优点。
-  与其它号称高可扩展性的编辑器相比，Emacs 内核几乎没有因为安全因素等考虑对用户产生任何限制，因此没有什么是在 Emacs 中扩展不出来的。
-  网络上有着非常大量的 Emacs 插件可供自由搭配选择，
-  你很难想到一个需求是别人没有解决过的，更有大量的功能是你不接触 Emacs 可能永远想不到的。
-  你可以根据你的需求安装插件，而不必安装你不需要的功能，最终你的 Emacs 会是为你自己高度定制化的一个编辑器。
+ - 可扩展与定制化：
+   - 事实上极强的可扩展性才是我认为的 Emacs 最核心的竞争力，前面两个优势归根结底也都是可扩展性带来的优点。
+     与其它号称高可扩展性的编辑器相比，Emacs 内核几乎没有因为安全因素等考虑对用户产生任何限制，因此没有什么是在 Emacs 中扩展不出来的。
+     网络上有着非常大量的 Emacs 插件可供自由搭配选择，
+     你很难想到一个需求是别人没有解决过的，更有大量的功能是你不接触 Emacs 可能永远想不到的。
+     你可以根据你的需求安装插件，而不必安装你不需要的功能，最终你的 Emacs 会是为你自己高度定制化的一个编辑器。
 
-- Emacs 插件涉及的功能非常广泛，一种调侃 Emacs 的说法是，Emacs 不是一个编辑器，而是一个操作系统，其中甚至有一些游戏、还能让 Emacs 成为一个功能完整的浏览器。
-  下图是一个 xkcd 网站上的漫画 Real Programmers，调侃了 Emacs 可以让蝴蝶扇动翅膀，利用蝴蝶效应引发内存上的一个比特翻转，由此来进行编程，表现了 Emacs 功能的丰富。此外，你可以使用 Emacs Lisp 进行编程，实现你独特的需求。
+   - Emacs 插件涉及的功能非常广泛，一种调侃 Emacs 的说法是，Emacs 不是一个编辑器，而是一个操作系统，其中甚至有一些游戏、还能让 Emacs 成为一个功能完整的浏览器。
+     下图是一个 xkcd 网站上的漫画 Real Programmers，调侃了 Emacs 可以让蝴蝶扇动翅膀，利用蝴蝶效应引发内存上的一个比特翻转，由此来进行编程，表现了 Emacs 功能的丰富。此外，你可以使用 Emacs Lisp 进行编程，实现你独特的需求。
 
 [[file:images/2024-11-28_20-30-32_screenshot.png]]
 
@@ -156,10 +156,98 @@ doom doctor  # 检查当前 doom emacs 的配置的可能的问题
         默认启用了 Evil Mode，提供了类似 Vim 的编辑体验。
         这使得 Doom Emacs 特别适合熟悉 Vim 的用户，同时也可以完全禁用 Evil 模式，使用原生的 Emacs 按键绑定。
 
+
+** 配置 Doom Emacs
+Doom Emacs 在原版 Emacs 的基础上添加了很多宏和语法糖，使得配置 Emacs 变得非常轻松。
+
+默认情况下， Doom Emacs 的配置都在变量 doom-user-dir 指向的目录下，与 emacs 自己的配置相独立
+（根据安装时的选择可能是 ~/.doom.d/ 或 ~/.config/doom/ ），主要是三个文件：
+
+- init.el ：启用/停用 Doom 预先配置好的模块（ modules ）；
+- package.el ：自己另行下载安装的软件包（ packages ），或对已启用的软件包版本进行配置，Doom Emacs 使用 straight.el 包管理器；
+- config.el ：各种配置，大部分预制模块不需要或者只需要少许配置，因为 Doom 已经做了相对好的缺省安排，自行安装的包则需要做相应的配置；
+             当然如果对 Doom 提供的缺省安排不满意，也可以在此动手覆盖。
+
+#+begin_src shell
+doom
+├── config.el    # 在这个文件中写入你的自定义配置
+├── custom.el    # 在这个文件中写入你的自定义变量值
+├── init.el      # 在这个文件中更改 Doom Emacs 包含的功能
+└── packages.el  # 在这个文件中添加你想安装的自定义软件包
+#+end_src
+
+*** init.el
+*Example:*
+#+begin_src elisp
+(doom! :input
+       ;;bidi              ; (tfel ot) thgir etirw uoy gnipleh
+       chinese
+       ;;japanese
+       ;;layout            ; auie,ctsrnm is the superior home row
+
+       :completion
+       ;;company           ; the ultimate code completion backend
+       (corfu +orderless)  ; complete with cap(f), cape and a flying feather!
+       ;;helm              ; the *other* search engine for love and life
+       ;;ido               ; the other *other* search engine...
+       ;;ivy               ; a search engine for love and life
+       vertico           ; the search engine of the future
+
+......  ; 此处省略更多内容
+#+end_src
+
+在这个文件中把你想要的插件取消注释 （删掉前面的分号），再在你的终端或者 Emacs 中运行一下 ~doom sync~ ，
+等它同步完成后，你的插件就安装好了，是不是很简单？
+
+Doom 预先配置好的插件可以参考： [[https://docs.doomemacs.org/latest/?#/modules/][Doom Emacs 的在线文档]] / 在你的 Doom Emacs 中输入 ~M-x doom/help~ 打开
+
+*** packages.el
+如果你想装的插件不在 doom 的配置中，怎么办？
+没关系， doom 提供了一种非常简洁的方法配置安装。
+
+*Example:*
+#+begin_src elisp
+(package! verilog-ext)
+(package! org-tree-slide)
+(package! org-download)
+;; 插件已经在 ELPA / MELPA 源中，可以直接安装
+#+end_src
+
+与之前相同，更改完之后需要在终端 / Emacs 中运行 ~doom sync~ 使配置生效。
+
+*** config.el
+*Example:*
+#+begin_src elisp
+(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 15))
+;; 设置 Doom 的字体为 FiraCode
+(setq doom-theme 'doom-badger)
+;; 设置 Doom 的主题为 doom-badger
+(setq display-line-numbers-type t)
+;; 设置行号显示
+(setq org-directory "~/Documents/org/")
+;; 设置你当前 org 模式默认储存你的笔记的位置
+#+end_src
+
 * Emacs 里的基本概念
-** Buffer
+** Emacs 的界面
+*** Buffer
+缓冲区是您编辑文件内容的地方。Buffer 临时保存文件的内容。写入缓冲区的任何内容都不会进入文件，除非您使用 save-buffer 命令显式保存它。
+
+*** Mini buffer
+顾名思义，是专门用于提示 Emacs 命令的 buffer，一般位于 Emacs 窗口的最底部。
+
+*** Frame
+编辑文件的窗口，一般在一个 buffer 里可以存在多个 frame。
+
+*** Modeline
+位于 mini buffer 的上方，用于提示当前 Emacs 的状态和被编辑文件的一些信息。
 
 ** Major-mode / Minor-mode
++ 特点
+  - Major 模式为处理特定文件类型提供了专门的工具，例如编程语言的语法高亮显示。主要模式是互斥的;每个缓冲区在任何时候都有且只有一个 Major Mode。
+    Emacs 捆绑了许多用于编辑不同语言源代码的主要模式：C、C++、Java、Lisp、bash、asm......例如，当打开扩展名为 .c 的文件时，Emacs 会自动识别它是一个 C 文件，并选择 C major mode 以正确突出显示缓冲区。
+  - 次要模式是可选功能，您可以打开或关闭这些功能，不一定特定于某种类型的文件或缓冲区。
+    例如，“自动填充”模式是一种次要模式，在该模式下，SPC 会在您键入时在单词之间换行。Minor 模式彼此独立，也独立于所选的 Major 模式。
 
 ** 快捷键约定
 <C-x> -> Ctrl + x
@@ -175,7 +263,8 @@ Emacs 中有五个功能键： Control 、 Meta 、 Shift 、 Super 、 Hyper �
 那 Meta 和 Super 又是什么呢？
 - Meta 对应于普通 PC 键盘上的 Alt 键，Mac 电脑上的 Option 键。
 - Super 对应 PC 键盘上的 Win 键，对应 Mac 电脑上的 Command 键。
-  那么我们知道， Super 键在现代系统中起到了重要作用，因此 Emacs 平常不使用和 Super 键相关的快捷键，Emacs 的绝大多数快捷键都是使用 Control 和 Meta 键，而其中一大部分都是只使用 Control 键。
+  那么我们知道， Super 键在现代系统中起到了重要作用，
+  因此 Emacs 平常不使用和 Super 键相关的快捷键，Emacs 的绝大多数快捷键都是使用 Control 和 Meta 键，而其中一大部分都是只使用 Control 键。
 #+END_QUOTE
 
 ** 常用快捷键
@@ -187,54 +276,71 @@ Emacs 中有五个功能键： Control 、 Meta 、 Shift 、 Super 、 Hyper �
 
 注： 在 doom emacs 的 evil-mode 下，emacs 里的文本导航快捷键也都被绑定在了 vim 的快捷键下，所以就不再重复说明了。
 
-除此之外，emacs 有一些常用的操作快捷键：
++ 除此之外，emacs 有一些常用的操作快捷键：
 
-- <C-x C-c>    # 退出 Emacs
-- <C-x C-s>    # 保存当前 buffer 至文件  （保存）
-- <C-x C-w>    # 将当前 buffer 另存为另一个文件  （另存为）
-- <C-x C-f>    # 打开一个文件
+  - <C-x C-c>    # 退出 Emacs
+  - <C-x s>      # 保存所有 buffer
+  - <C-x C-s>    # 保存当前 buffer 至文件  （保存）
+  - <C-x C-w>    # 将当前 buffer 另存为另一个文件  （另存为）
+  - <C-x C-f>    # 打开一个文件
 
-- <C-x b>    # 列出当前所有的 buffer
-  <C-x k>    # 删除一个指定的 buffer
+  - <C-x b>    # 列出当前所有的 buffer
+    <C-x k>    # 删除一个指定的 buffer
 
-- <C-x 1>    # 开启一个窗口
-  <C-x 2>    # 在当前窗口下方打开一个窗口
-  <C-x 3>    # 在当前窗口右方打开一个窗口
-  <C-x o>    # 将光标移至另一个窗口
+  - <C-x 1>    # 开启一个窗口
+    <C-x 2>    # 在当前窗口下方打开一个窗口
+    <C-x 3>    # 在当前窗口右方打开一个窗口
+    <C-x o> / <C-x UpArrow/DownArrow/LeftArrow/RightArrow>    # 将光标移至另一个窗口
 
-- <C-x SPC>    # 在当前光标位置设置一个标记 （在 evil-mode 下会自动进入 visual 模式）
-  <C-x C-x>    # 在当前光标位置和上一个标记之间创建一个选择区间 （同理，在 evil-mode 下会自动创建 visual block）
+  - <C-x SPC>    # 在当前光标位置设置一个标记 （在 evil-mode 下会自动进入 visual 模式）
+    <C-x C-x>    # 在当前光标位置和上一个标记之间创建一个选择区间 （同理，在 evil-mode 下会自动创建 visual block）
 
-- <M-w>    # 复制当前选中区域
-  <C-w>    # 剪切当前选中区域  （在 evil-mode 中被重绑定到了 evil 的相关快捷键）
-  <C-y>    # 粘贴之前复制的内容 （yank）
+  - <M-w>    # 复制当前选中区域
+    <C-w>    # 剪切当前选中区域  （在 evil-mode 中被重绑定到了 evil 的相关快捷键）
+    <C-y>    # 粘贴之前复制的内容 （yank）
 
-  #+begin_quote
-  Hint:在 emacs 中，yanking 指代的是粘贴，而在 vim 中，yanking 指代的是复制。
-  #+end_quote
+    #+begin_quote
+    Hint:在 emacs 中，yanking 指代的是粘贴，而在 vim 中，yanking 指代的是复制。
+    #+end_quote
 
-  Emacs 内部维护了一个环形“剪贴板历史”，
-  当你想插入之前移除的内容时（即粘贴之前剪切的内容），按下 C-y ，这被称为 "yank"，它会将最近一次移除的内容插入回来。
-  那么如何粘贴历史记录呢？在一次 "yank" 的基础上，再按 M-y ，就可以得到倒数第二次移除的内容，再按一次 M-y 即可得到倒数第三次移除的内容，以此类推。
+    Emacs 内部维护了一个环形“剪贴板历史”，
+    当你想插入之前移除的内容时（即粘贴之前剪切的内容），按下 C-y ，这被称为 "yank"，它会将最近一次移除的内容插入回来。
+    那么如何粘贴历史记录呢？在一次 "yank" 的基础上，再按 M-y ，就可以得到倒数第二次移除的内容，再按一次 M-y 即可得到倒数第三次移除的内容，以此类推。
 
-  #+begin_quote
-  Hint：counsel 插件可以辅助这个过程。
-  #+end_quote
+    #+begin_quote
+    Hint：counsel 插件可以辅助这个过程。
+    #+end_quote
 
-- <C-/> / <C-_> / <C-x u>    # 撤销上一次操作
-  <C-g C-/> / <C-g C-_> / <C-g C-x u>    # 重做上一次操作，即先按下 C-g，再按下撤销键，相当于撤销上一次撤销。
-                                           与复制粘贴一样，Emacs 同样为我们维护了一个环形的撤销历史，当我们按下 C-g 的时候，
-                                           相当于我们改变了当前撤销的方向，此时再进行撤销操作，就变成了重做。
+  - <C-/> / <C-_> / <C-x u>    # 撤销上一次操作
+    <C-g C-/> / <C-g C-_> / <C-g C-x u>    # 重做上一次操作，即先按下 C-g，再按下撤销键，相当于撤销上一次撤销。
+                                             与复制粘贴一样，Emacs 同样为我们维护了一个环形的撤销历史，当我们按下 C-g 的时候，
+                                             相当于我们改变了当前撤销的方向，此时再进行撤销操作，就变成了重做。
 
- #+begin_quote
-  Hint：与剪贴板历史一样，undo-tree 插件可以辅助这个过程。
-  #+end_quote
+   #+begin_quote
+    Hint：与剪贴板历史一样，undo-tree 插件可以辅助这个过程。
+    #+end_quote
 
--
-
+  - <C-s>     # 向前搜索内容，再次按下 C-s 可以跳转至下一个目标
+  - <C-r>     # 向后搜索内容，再次按下 C-r 可以跳转至上一个目标
+  - <C-M-s>   # 按照正则表达式搜索
 
 * Emacs 的杀手锏
 ** Org-mode
+Org mode 实际上是一种轻量级标记语言，与 RST、 Markdown 类似，不过要比这两者拥有更为强大的功能和特性，是众多 Emacs 用户重度依赖的一个插件，对我个人来说也是构成日常工作、生活必不可少的重要工具。正如它的自我介绍所言， Org mode 与 RST 、 Markdown 相比，除了作为编辑环境以外，还可以进行任务管理、项目规划、笔记收集整理等各种操作 —— 事实上由于 Org mode 作为 Emacs 的插件，构建在 emacs lisp 语言之上，也使得它具备了无与伦比的可扩展性，但同时由于有统一的开发团队进行维护，而使得其语法规则没有因为强大的可扩展性而导致不同方言的泛滥，而 Markdown 就没有避免这个问题。
+
+需要说明的是，作为一个标记语言， Org mode 的基本语法规则其实是很简单的，但它同时还提供了大量的“功能”使得其变得异常强大，但这些功能都是构建在基本的语法规则之上的。对于初学者来说，Org mode 能够很快地上手，而在上手后又还有非常丰富的内容可待探索。
+
++ 以下是 Org mode 的几大特性:
+
+  - *基于大纲的编辑(outline-based editing)*
+  - 灵活强大的任务管理(planning)
+  - 任务计时及统计(clocking)
+  - 日程管理(agendas)
+  - 快速捕获(capture)
+  - 功能丰富的表格操作(tables)
+  - 导出到多种外部格式(exporting)
+  - *文学编程(working with source code)*
+  - 移动端支持(with your mobile phone)
 
 ** Magit
 
