@@ -101,8 +101,8 @@ emacs --daemon  # 在后台启动一个 Emacs 实例
 emacsclient  # 在后台启动 Emacs daemon 之后，就可以这样连接这个实例了
 #+END_SRC
 
-** 安装 Doom Emacs
-由于原版 Emacs 的功能相对于今天还是过于简陋，我们可以安装一些插件来扩展它的功能。
+** 安装 Doom Emacs 👿
+由于原版 Emacs 的功能相对于今天来说已经过于简陋了，我们可以安装一些插件来扩展它的功能。
 类似于 Linux 发行版，Emacs 也有很多配置好的，开箱即用的发行版，我建议入门可以先从这里开始，等到逐渐熟悉 Emacs 之后再配置自己的 Emacs 配置。
 
 #+begin_quote
@@ -120,6 +120,7 @@ git clone --depth 1 https://github.com/doomemacs/doomemacs ~/.config/emacs
 *** 添加 doom 可执行文件到你的 $PATH 环境变量中
 #+begin_src shell
 echo "export PATH=$PATH:~/.config/emacs/bin" >> ~/.bashrc
+source ~/.bashrc
 #+end_src
 
 *** 常用的 doom 命令
@@ -155,7 +156,6 @@ doom doctor  # 检查当前 doom emacs 的配置的可能的问题
 - *基于 Evil 模式*
         默认启用了 Evil Mode，提供了类似 Vim 的编辑体验。
         这使得 Doom Emacs 特别适合熟悉 Vim 的用户，同时也可以完全禁用 Evil 模式，使用原生的 Emacs 按键绑定。
-
 
 ** 配置 Doom Emacs
 Doom Emacs 在原版 Emacs 的基础上添加了很多宏和语法糖，使得配置 Emacs 变得非常轻松。
@@ -199,7 +199,7 @@ doom
 在这个文件中把你想要的插件取消注释 （删掉前面的分号），再在你的终端或者 Emacs 中运行一下 ~doom sync~ ，
 等它同步完成后，你的插件就安装好了，是不是很简单？
 
-Doom 预先配置好的插件可以参考： [[https://docs.doomemacs.org/latest/?#/modules/][Doom Emacs 的在线文档]] / 在你的 Doom Emacs 中输入 ~M-x doom/help~ 打开
+Doom 预先配置好的插件可以参考： [[https://docs.doomemacs.org/latest/?#/modules/][Doom Emacs 的在线文档]] / 或者在你的 Doom Emacs 中输入 ~M-x doom/help~ 打开
 
 *** packages.el
 如果你想装的插件不在 doom 的配置中，怎么办？
@@ -210,7 +210,7 @@ Doom 预先配置好的插件可以参考： [[https://docs.doomemacs.org/latest
 (package! verilog-ext)
 (package! org-tree-slide)
 (package! org-download)
-;; 插件已经在 ELPA / MELPA 源中，可以直接安装
+;; 若插件已经在 ELPA / MELPA 源中，可以直接指定名称安装
 #+end_src
 
 与之前相同，更改完之后需要在终端 / Emacs 中运行 ~doom sync~ 使配置生效。
@@ -230,6 +230,12 @@ Doom 预先配置好的插件可以参考： [[https://docs.doomemacs.org/latest
 
 * Emacs 里的基本概念
 ** Emacs 的界面
+:PROPERTIES:
+:ID:       32d6ba31-6582-4bda-a539-03b2a00258cd
+:END:
+*** 图片
+[[file:images/2024-11-30_13-00-21_screenshot.png]]
+
 *** Buffer
 缓冲区是您编辑文件内容的地方。Buffer 临时保存文件的内容。写入缓冲区的任何内容都不会进入文件，除非您使用 save-buffer 命令显式保存它。
 
@@ -237,15 +243,17 @@ Doom 预先配置好的插件可以参考： [[https://docs.doomemacs.org/latest
 顾名思义，是专门用于提示 Emacs 命令的 buffer，一般位于 Emacs 窗口的最底部。
 
 *** Frame
-编辑文件的窗口，一般在一个 buffer 里可以存在多个 frame。
+Emacs 程序的主窗口，一般在一个 frame。
 
 *** Modeline
 位于 mini buffer 的上方，用于提示当前 Emacs 的状态和被编辑文件的一些信息。
 
 ** Major-mode / Minor-mode
 + 特点
-  - Major 模式为处理特定文件类型提供了专门的工具，例如编程语言的语法高亮显示。主要模式是互斥的;每个缓冲区在任何时候都有且只有一个 Major Mode。
-    Emacs 捆绑了许多用于编辑不同语言源代码的主要模式：C、C++、Java、Lisp、bash、asm......例如，当打开扩展名为 .c 的文件时，Emacs 会自动识别它是一个 C 文件，并选择 C major mode 以正确突出显示缓冲区。
+  - Major 模式为处理特定文件类型提供了专门的工具，例如编程语言的语法高亮显示。一个模式就对应着一组环境，不同模式可以分别进行配置，应对不同的场景。
+    主要模式是互斥的;每个缓冲区在任何时候都有且只有一个 Major Mode。
+    Emacs 捆绑了许多用于编辑不同语言源代码的主要模式：C、C++、Java、Lisp、bash、asm......
+    例如，当打开扩展名为 .c 的文件时，Emacs 会自动识别它是一个 C 文件，并选择 C major mode 以正确突出显示缓冲区。
   - 次要模式是可选功能，您可以打开或关闭这些功能，不一定特定于某种类型的文件或缓冲区。
     例如，“自动填充”模式是一种次要模式，在该模式下，SPC 会在您键入时在单词之间换行。Minor 模式彼此独立，也独立于所选的 Major 模式。
 
@@ -253,7 +261,7 @@ Doom 预先配置好的插件可以参考： [[https://docs.doomemacs.org/latest
 <C-x> -> Ctrl + x
 <M-x> -> Meta + x    # 调用宏
 
-特别的，在 Linux/macOS 系统的终端中，是可以使用部分 Emacs 快捷键的；
+特别的，在 Linux/macOS 系统的终端中，是可以使用部分 Emacs 快捷键的； //
 在 macOS 系统中的各种文本编辑框，如备忘录、浏览器搜索框等等也都支持 Emacs 光标移动快捷键。因此可以说，掌握 Emacs 快捷键，在各种操作系统中都可以享受到其带来的方便快捷。
 
 #+BEGIN_QUOTE
@@ -326,12 +334,17 @@ Emacs 中有五个功能键： Control 、 Meta 、 Shift 、 Super 、 Hyper �
 
 * Emacs 的杀手锏
 ** Org-mode
-Org mode 实际上是一种轻量级标记语言，与 RST、 Markdown 类似，不过要比这两者拥有更为强大的功能和特性，是众多 Emacs 用户重度依赖的一个插件，对我个人来说也是构成日常工作、生活必不可少的重要工具。正如它的自我介绍所言， Org mode 与 RST 、 Markdown 相比，除了作为编辑环境以外，还可以进行任务管理、项目规划、笔记收集整理等各种操作 —— 事实上由于 Org mode 作为 Emacs 的插件，构建在 emacs lisp 语言之上，也使得它具备了无与伦比的可扩展性，但同时由于有统一的开发团队进行维护，而使得其语法规则没有因为强大的可扩展性而导致不同方言的泛滥，而 Markdown 就没有避免这个问题。
+Org mode 实际上是一种轻量级标记语言，与 RST、 Markdown 类似，
+不过要比这两者拥有更为强大的功能和特性，是众多 Emacs 用户重度依赖的一个插件。
+正如它的自我介绍所言， Org mode 与 RST 、 Markdown 相比，除了作为编辑环境以外，还可以进行任务管理、项目规划、笔记收集整理等各种操作
+—— 事实上由于 Org mode 作为 Emacs 的插件，构建在 emacs lisp 语言之上，也使得它具备了无与伦比的可扩展性，
+   但同时由于有统一的开发团队进行维护，而使得其语法规则没有因为强大的可扩展性而导致不同方言的泛滥。
 
-需要说明的是，作为一个标记语言， Org mode 的基本语法规则其实是很简单的，但它同时还提供了大量的“功能”使得其变得异常强大，但这些功能都是构建在基本的语法规则之上的。对于初学者来说，Org mode 能够很快地上手，而在上手后又还有非常丰富的内容可待探索。
+需要说明的是，作为一个标记语言， Org mode 的基本语法规则其实是很简单的，
+但它同时还提供了大量的“功能”使得其变得异常强大，但这些功能都是构建在基本的语法规则之上的。
+对于初学者来说，Org mode 能够很快地上手，而在上手后又还有非常丰富的内容可待探索。
 
 + 以下是 Org mode 的几大特性:
-
   - *基于大纲的编辑(outline-based editing)*
   - 灵活强大的任务管理(planning)
   - 任务计时及统计(clocking)
@@ -342,6 +355,12 @@ Org mode 实际上是一种轻量级标记语言，与 RST、 Markdown 类似，
   - *文学编程(working with source code)*
   - 移动端支持(with your mobile phone)
 
-** Magit
+** Magit, verilog-mode ...
 
-** verilog-mode
+* 进一步学习？
++ 一些可以参考的资料
+  - Doom Emacs 帮助  SPC-h d h
+  - [[https://pavinberg.github.io/emacs-book/zh/][专业 Emacs 入门]]
+  - [[https://book.emacs-china.org/#org850ce0c][21 天学会 Emacs]]
+  - [[https://tuhdo.github.io/emacs-tutor.html][Emacs mini tutorial]]
+  - [[https://soulhacker.me/posts/doom-emacs-config/][Doom Emacs 配置]]
