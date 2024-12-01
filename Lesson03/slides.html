@@ -1,0 +1,972 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2024-12-01 Sun 11:39 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Church of Emacs!</title>
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="https://gongzhitaao.org/orgcss/org.css"/>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Church of Emacs!</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org30159c8">1. 什么是 Emacs？</a>
+<ul>
+<li><a href="#org3bbd9b3">1.1. Emacs 的历史</a></li>
+<li><a href="#org0e8ad3a">1.2. 编辑器圣战</a>
+<ul>
+<li><a href="#org3decbce">1.2.1. Vim</a></li>
+<li><a href="#org1e0a7d9">1.2.2. Emacs</a></li>
+</ul>
+</li>
+<li><a href="#org5d5c622">1.3. 编辑器不是最重要的&#x2026;</a></li>
+</ul>
+</li>
+<li><a href="#org86c6bcb">2. 安装 Emacs</a>
+<ul>
+<li><a href="#org6fcb861">2.1. 使用包管理器安装</a></li>
+<li><a href="#org1cd790d">2.2. 启动 Emacs</a></li>
+<li><a href="#orgf5cde43">2.3. 安装 Doom Emacs 👿</a>
+<ul>
+<li><a href="#orga55847c">2.3.1. 克隆 Doom Emacs 仓库到你的 Emacs 配置文件目录下</a></li>
+<li><a href="#org97e087c">2.3.2. 添加 doom 可执行文件到你的 $PATH 环境变量中</a></li>
+<li><a href="#orgcaf55b8">2.3.3. 常用的 doom 命令</a></li>
+</ul>
+</li>
+<li><a href="#orgbc164e1">2.4. 配置 Doom Emacs</a>
+<ul>
+<li><a href="#org5207dfe">2.4.1. init.el</a></li>
+<li><a href="#org0f4f7dd">2.4.2. packages.el</a></li>
+<li><a href="#orgeda17b1">2.4.3. config.el</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org5f2e9a3">3. Emacs 里的基本概念</a>
+<ul>
+<li><a href="#orga33921f">3.1. Emacs 的界面</a>
+<ul>
+<li><a href="#orgfd4990e">3.1.1. 图片</a></li>
+<li><a href="#org68bd4a9">3.1.2. Buffer</a></li>
+<li><a href="#org2769a99">3.1.3. Mini buffer</a></li>
+<li><a href="#org7cad215">3.1.4. Frame</a></li>
+<li><a href="#orga9aadc7">3.1.5. Modeline</a></li>
+</ul>
+</li>
+<li><a href="#orgab47504">3.2. Major-mode / Minor-mode</a></li>
+<li><a href="#org9b5d2b2">3.3. 快捷键约定</a></li>
+<li><a href="#orge00c4d6">3.4. 常用快捷键</a></li>
+</ul>
+</li>
+<li><a href="#orgd4efb11">4. Emacs 的杀手锏</a>
+<ul>
+<li><a href="#orgdd6cb68">4.1. Org-mode</a></li>
+<li><a href="#orgad5205d">4.2. Magit, verilog-mode &#x2026;</a></li>
+</ul>
+</li>
+<li><a href="#org2d68dfd">5. 进一步学习？</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org30159c8" class="outline-2">
+<h2 id="org30159c8"><span class="section-number-2">1.</span> 什么是 Emacs？</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<a href="https://www.gnu.org/software/emacs/tour/index.html">Emacs 官网</a>
+</p>
+
+<p>
+<b>它是一个伪装成文本编辑器的操作系统！</b>
+</p>
+</div>
+<div id="outline-container-org3bbd9b3" class="outline-3">
+<h3 id="org3bbd9b3"><span class="section-number-3">1.1.</span> Emacs 的历史</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+1960s-1970s: Emacs 的历史可以追溯到 1960 年代后期，那个时代的文本编辑器通常是高度定制化的。
+</p>
+
+<p>
+例如，MIT 的人工智能实验室使用一个名为 TECO (Text Editor and Corrector) 的文本编辑器。
+</p>
+
+<p>
+1976 年: Richard Stallman （RMS） 和 Guy L. Steele Jr. 在 MIT 人工智能实验室开发了最早版本的 Emacs。
+</p>
+
+<p>
+他们的目标是创建一个高度可扩展且用户友好的编辑器，于是将 TECO 作为基础，并加入了宏功能。
+Emacs 是 GNU 项目重要的组成部分之一，也是当时自由软件运动的一个重要里程碑。
+</p>
+
+
+<div id="org544ab2e" class="figure">
+<p><img src="images/2024-11-28_20-48-33_screenshot.png" alt="2024-11-28_20-48-33_screenshot.png" />
+</p>
+</div>
+
+<p>
+<del>RMS 的帅照（</del>
+</p>
+
+<p>
+Emacs 是一个文本编辑器系列，包含有多个分支，其中最主流的一支是 GNU Emacs，大多数情况下所说的 Emacs 都是指 GNU Emacs。
+</p>
+
+<p>
+Emacs 这一名字最早来源于 “Editor MACroS”，后来也有人称它集合了五个主要功能键的首字母 Esc、Meta、Alt、Ctrl、Shift。
+</p>
+
+<p>
+Emacs 的主要思路是大量依赖组合快捷键实现高效编辑，这直接导致了想要流畅使用 Emacs 必须要记忆 Emacs 的大量快捷键，需要相当一段时间熟悉。
+</p>
+
+<p>
+此外，Emacs 编辑器本身所使用的编程语言是 Emacs Lisp 语言，Lisp 语言的方言之一。
+Lisp 语言是诞生于 1958 年的世上第二古老高级程序设计语言，其语言以“列表”（List）作为语法和核心数据结构，由于其具备强大的宏系统，可以创造各式方言，Emacs Lisp 就是其中之一。
+</p>
+
+<p>
+这个语言相对于我们常见的编程语言来说，晦涩难懂，同样增加了 Emacs 的学习难度。网上流传着一个有趣的形容各个编辑器学习曲线的图片：
+</p>
+
+
+<div id="org2e7de00" class="figure">
+<p><img src="images/2024-11-28_20-28-36_screenshot.png" alt="2024-11-28_20-28-36_screenshot.png" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org0e8ad3a" class="outline-3">
+<h3 id="org0e8ad3a"><span class="section-number-3">1.2.</span> 编辑器圣战</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Emacs 与 Vi 共同被称为最古老的 Unix 编辑器，一代代程序员对 Emacs 和 Vi （尤其后来出现的 Vim）产生了无休止的争论。
+</p>
+
+<p>
+Emacs 诞生已有近五十年时间，是世界上最古老而依然活跃（截止 2021 年）的开源软件之一。
+</p>
+</div>
+<div id="outline-container-org3decbce" class="outline-4">
+<h4 id="org3decbce"><span class="section-number-4">1.2.1.</span> Vim</h4>
+<div class="outline-text-4" id="text-1-2-1">
+<p>
+特点：
+</p>
+<ul class="org-ul">
+<li>轻量、快速、以模式切换为核心（插入模式、命令模式等），主要依赖键盘操作，效率极高。</li>
+</ul>
+
+<p>
+用户界面:
+</p>
+<ul class="org-ul">
+<li>vi 早先独占命令行终端，没有图形用户界面（GUI）。</li>
+</ul>
+
+<p>
+语言支持：
+</p>
+<ul class="org-ul">
+<li>vi 对除英语以外的语言的支持不好。Vim 可以部分地支持其他语言，例如阿拉伯语、希伯来语、中文、日文等。</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1e0a7d9" class="outline-4">
+<h4 id="org1e0a7d9"><span class="section-number-4">1.2.2.</span> Emacs</h4>
+<div class="outline-text-4" id="text-1-2-2">
+<ul class="org-ul">
+<li><p>
+特点：
+</p>
+<ul class="org-ul">
+<li>功能全面，几乎是一个“操作系统级”的编辑器，可以运行邮箱客户端、RSS 阅读器，甚至玩游戏。
+<del>事实上，你也完全可以在 Emacs 的终端中运行一个 vim （</del></li>
+</ul>
+
+<ul class="org-ul">
+<li>用户界面：
+<ul class="org-ul">
+<li><p>
+Emacs，最初也为终端设计。作为早期 Lisp 机器遗留下来的产物，它只提供了纯文本界面。
+</p>
+
+<p>
+从 Emacs 18 开始支持 X11 GUI，并且在 Emacs 19 成为默认支持的界面。现在的 Emacs 完全支持等距字体，支持字号的变化，而且支持文档内嵌图象和超级链接。
+</p></li>
+</ul></li>
+
+<li>语言支持：
+<ul class="org-ul">
+<li>Emacs 支持所有兼容 Unicode 的语言。</li>
+<li>Emacs 可以实现中英文自动空格功能。</li>
+<li>Emacs 支持在编辑器内调用 rime 输入法。</li>
+</ul></li>
+
+<li>可扩展与定制化：
+<ul class="org-ul">
+<li><p>
+事实上极强的可扩展性才是我认为的 Emacs 最核心的竞争力，前面两个优势归根结底也都是可扩展性带来的优点。
+</p>
+
+<p>
+与其它号称高可扩展性的编辑器相比，Emacs 内核几乎没有因为安全因素等考虑对用户产生任何限制，因此没有什么是在 Emacs 中扩展不出来的。
+</p>
+
+<p>
+网络上有着非常大量的 Emacs 插件可供自由搭配选择，你很难想到一个需求是别人没有解决过的，更有大量的功能是你不接触 Emacs 可能永远想不到的。
+</p>
+
+<p>
+你可以根据你的需求安装插件，而不必安装你不需要的功能，最终你的 Emacs 会是为你自己高度定制化的一个编辑器。
+</p></li>
+
+<li><p>
+Emacs 插件涉及的功能非常广泛，一种调侃 Emacs 的说法是，Emacs 不是一个编辑器，而是一个操作系统，其中甚至有一些游戏、还能让 Emacs 成为一个功能完整的浏览器。
+</p>
+
+<p>
+下图是一个 xkcd 网站上的漫画 Real Programmers，调侃了 Emacs 可以让蝴蝶扇动翅膀，利用蝴蝶效应引发内存上的一个比特翻转，由此来进行编程，表现了 Emacs 功能的丰富。此外，你可以使用 Emacs Lisp 进行编程，实现你独特的需求。
+</p></li>
+</ul></li>
+</ul></li>
+</ul>
+
+
+<div id="org3b53fed" class="figure">
+<p><img src="images/2024-11-28_20-30-32_screenshot.png" alt="2024-11-28_20-30-32_screenshot.png" />
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org5d5c622" class="outline-3">
+<h3 id="org5d5c622"><span class="section-number-3">1.3.</span> 编辑器不是最重要的&#x2026;</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+事实上，编辑器并不是决定一个人编程水平的关键。但是一个好用的编辑器往往可以极大的提升你的编辑效率，达成事半功倍的效果。
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org86c6bcb" class="outline-2">
+<h2 id="org86c6bcb"><span class="section-number-2">2.</span> 安装 Emacs</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org6fcb861" class="outline-3">
+<h3 id="org6fcb861"><span class="section-number-3">2.1.</span> 使用包管理器安装</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+以 Ubuntu/Debian 为例
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #C7B299;">sudo</span> apt install emacs
+<span style="color: #656868;"># </span><span style="color: #656868;">&#22914;&#26524;&#24403;&#21069; Ubuntu &#28304;&#20869;&#30340;&#29256;&#26412;&#22826;&#20302;&#65292;&#21487;&#20197;&#33258;&#34892;&#21435;&#23448;&#32593;&#19979;&#36733;&#23433;&#35013;&#12290;</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org1cd790d" class="outline-3">
+<h3 id="org1cd790d"><span class="section-number-3">2.2.</span> 启动 Emacs</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+安装之后，默认会在你的桌面应用程序列表里生成一个 Emacs 的图标（也就是 desktop 文件），双击它就可以启动了。
+</p>
+
+<p>
+或者：你也可以输入以下命令在终端中启动 Emacs
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">emacs  <span style="color: #656868;"># </span><span style="color: #656868;">&#20197;&#22270;&#24418;&#30028;&#38754;&#21551;&#21160; Emacs</span>
+emacs -nw  <span style="color: #656868;"># </span><span style="color: #656868;">&#22312;&#32456;&#31471;&#20013;&#21551;&#21160; Emacs&#65292;&#31867;&#20284;&#20110; Vim</span>
+
+emacs --daemon  <span style="color: #656868;"># </span><span style="color: #656868;">&#22312;&#21518;&#21488;&#21551;&#21160;&#19968;&#20010; Emacs &#23454;&#20363;</span>
+emacsclient  <span style="color: #656868;"># </span><span style="color: #656868;">&#22312;&#21518;&#21488;&#21551;&#21160; Emacs daemon &#20043;&#21518;&#65292;&#23601;&#21487;&#20197;&#36825;&#26679;&#36830;&#25509;&#36825;&#20010;&#23454;&#20363;&#20102;</span>
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf5cde43" class="outline-3">
+<h3 id="orgf5cde43"><span class="section-number-3">2.3.</span> 安装 Doom Emacs 👿</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+由于原版 Emacs 的功能相对于今天来说已经过于简陋了，我们可以安装一些插件来扩展它的功能。
+</p>
+
+<p>
+类似于 Linux 发行版，Emacs 也有很多配置好的，开箱即用的发行版，我建议入门可以先从这里开始，等到逐渐熟悉 Emacs 之后再配置自己的 Emacs 配置。
+</p>
+
+<blockquote>
+<p>
+Doom 是一个为 GNU Emacs 设计的配置框架，专为那些经历过 Emacs 配置挫折的人打造。
+</p>
+
+<p>
+它适合那些希望框架更简洁、对包管理器有一定的稳定性（和可重复性）要求，并且追求媲美手动精心打造配置（甚至更优）性能的用户。它既可以作为你个人配置的基础，也可以作为 Emacs 爱好者学习和探索这款我们最喜欢的“操作系统”的资源。
+</p>
+</blockquote>
+</div>
+<div id="outline-container-orga55847c" class="outline-4">
+<h4 id="orga55847c"><span class="section-number-4">2.3.1.</span> 克隆 Doom Emacs 仓库到你的 Emacs 配置文件目录下</h4>
+<div class="outline-text-4" id="text-2-3-1">
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #C7B299;">git</span> clone --depth <span style="color: #F6F3E8; font-weight: bold;">1</span> https://github.com/doomemacs/doomemacs ~/.config/emacs
+~/.config/emacs/bin/doom install
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org97e087c" class="outline-4">
+<h4 id="org97e087c"><span class="section-number-4">2.3.2.</span> 添加 doom 可执行文件到你的 $PATH 环境变量中</h4>
+<div class="outline-text-4" id="text-2-3-2">
+<div class="org-src-container">
+<pre class="src src-shell"><span style="color: #C7B299;">echo</span> <span style="color: #86B187;">"export PATH=</span><span style="color: #635770;">$</span><span style="color: #BF93C3;">PATH</span><span style="color: #86B187;">:~/.config/emacs/bin"</span> &gt;&gt; ~/.bashrc
+<span style="color: #F28B86;">source</span> ~/.bashrc
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgcaf55b8" class="outline-4">
+<h4 id="orgcaf55b8"><span class="section-number-4">2.3.3.</span> 常用的 doom 命令</h4>
+<div class="outline-text-4" id="text-2-3-3">
+<div class="org-src-container">
+<pre class="src src-shell">doom sync  <span style="color: #656868;"># </span><span style="color: #656868;">&#21516;&#27493; doom &#37197;&#32622;&#65292;&#22312;&#28155;&#21152;&#33258;&#23450;&#20041;&#37197;&#32622;&#21518;&#20351;&#29992;</span>
+doom upgrade  <span style="color: #656868;"># </span><span style="color: #656868;">&#23558; doom emacs &#21319;&#32423;&#33267;&#26368;&#26032;&#29256;&#26412;</span>
+doom doctor  <span style="color: #656868;"># </span><span style="color: #656868;">&#26816;&#26597;&#24403;&#21069; doom emacs &#30340;&#37197;&#32622;&#30340;&#21487;&#33021;&#30340;&#38382;&#39064;</span>
+</pre>
+</div>
+
+<p>
+<a href="https://github.com/doomemacs/doomemacs/blob/master/docs/getting_started.org">参考： 官方入门教程</a>
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org8e1633f"></a>核心特点<br />
+<div class="outline-text-5" id="text-2-3-3-1">
+<ul class="org-ul">
+<li>快速启动和性能优化
+Doom Emacs 对启动时间和运行效率进行了高度优化，通常比传统的 Emacs 配置启动得更快。它通过懒加载和模块化设计避免了加载不必要的功能，从而提升了性能。</li>
+
+<li>模块化设计
+Doom Emacs 的配置基于模块化结构，用户可以通过简单地启用或禁用模块来快速定制自己的 Emacs。模块涵盖了各种功能，比如编程语言支持、UI 增强、工具集成等。</li>
+
+<li><b>友好的配置文件</b>
+Doom Emacs 的核心配置文件（~/.doom.d/config.el, init.el, packages.el）非常清晰且易于理解，即使是对 Emacs 不熟悉的新用户也能快速上手。它使用了可读性强的 Lisp 语法，并提供了详细的文档。</li>
+
+<li>社区支持的模块
+Doom Emacs 提供了丰富的社区支持模块，涵盖了从编程语言（如 Python、Rust、JavaScript）到工具集成（如 Git、Docker）等各种需求。这些模块经过精心优化，能提供开箱即用的体验。</li>
+
+<li><b>现代化界面</b>
+Doom Emacs 提供了许多现代化的 UI 增强，比如主题支持（默认使用 Doom Themes）、图标集成、平滑滚动和丰富的状态栏（基于 doom-modeline）。让 Emacs 的外观和使用体验更符合现代编辑器的标准。</li>
+
+<li><b>基于 Evil 模式</b>
+默认启用了 Evil Mode，提供了类似 Vim 的编辑体验。这使得 Doom Emacs 特别适合熟悉 Vim 的用户，同时也可以完全禁用 Evil 模式，使用原生的 Emacs 按键绑定。</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgbc164e1" class="outline-3">
+<h3 id="orgbc164e1"><span class="section-number-3">2.4.</span> 配置 Doom Emacs</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+Doom Emacs 在原版 Emacs 的基础上添加了很多宏和语法糖，使得配置 Emacs 变得非常轻松。
+</p>
+
+<p>
+默认情况下， Doom Emacs 的配置都在变量 doom-user-dir 指向的目录下，与 emacs 自己的配置相独立（根据安装时的选择可能是 ~/.doom.d/ 或 ~/.config/doom/ ），主要是三个文件：
+</p>
+
+<ul class="org-ul">
+<li>init.el ：启用/停用 Doom 预先配置好的模块（ modules ）；</li>
+<li>package.el ：自己另行下载安装的软件包（ packages ），或对已启用的软件包版本进行配置，Doom Emacs 使用 straight.el 包管理器；</li>
+<li>config.el ：各种配置，大部分预制模块不需要或者只需要少许配置，因为 Doom 已经做了相对好的缺省安排，自行安装的包则需要做相应的配置；当然如果对 Doom 提供的缺省安排不满意，也可以在此动手覆盖。</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-shell">doom
+&#9500;&#9472;&#9472; config.el    <span style="color: #656868;"># </span><span style="color: #656868;">&#22312;&#36825;&#20010;&#25991;&#20214;&#20013;&#20889;&#20837;&#20320;&#30340;&#33258;&#23450;&#20041;&#37197;&#32622;</span>
+&#9500;&#9472;&#9472; custom.el    <span style="color: #656868;"># </span><span style="color: #656868;">&#22312;&#36825;&#20010;&#25991;&#20214;&#20013;&#20889;&#20837;&#20320;&#30340;&#33258;&#23450;&#20041;&#21464;&#37327;&#20540;</span>
+&#9500;&#9472;&#9472; init.el      <span style="color: #656868;"># </span><span style="color: #656868;">&#22312;&#36825;&#20010;&#25991;&#20214;&#20013;&#26356;&#25913; Doom Emacs &#21253;&#21547;&#30340;&#21151;&#33021;</span>
+&#9492;&#9472;&#9472; packages.el  <span style="color: #656868;"># </span><span style="color: #656868;">&#22312;&#36825;&#20010;&#25991;&#20214;&#20013;&#28155;&#21152;&#20320;&#24819;&#23433;&#35013;&#30340;&#33258;&#23450;&#20041;&#36719;&#20214;&#21253;</span>
+</pre>
+</div>
+</div>
+<div id="outline-container-org5207dfe" class="outline-4">
+<h4 id="org5207dfe"><span class="section-number-4">2.4.1.</span> init.el</h4>
+<div class="outline-text-4" id="text-2-4-1">
+<p>
+<b>Example:</b>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #8AC6F2;">(</span><span style="color: #8AC6F2;">doom!</span> <span style="color: #F28B86;">:input</span>
+&#9474; &#9474; &#9474; &#9474;<span style="color: #656868;">;;</span><span style="color: #656868;">bidi              ; (tfel ot) thgir etirw uoy gnipleh</span>
+&#9474; &#9474; &#9474; &#9474;chinese
+&#9474; &#9474; &#9474; &#9474;<span style="color: #656868;">;;</span><span style="color: #656868;">japanese</span>
+&#9474; &#9474; &#9474; &#9474;<span style="color: #656868;">;;</span><span style="color: #656868;">layout            ; auie,ctsrnm is the superior home row</span>
+&#9474; &#9474; &#9474; &#9474;
+&#9474; &#9474; &#9474; &#9474;<span style="color: #F28B86;">:completion</span>
+&#9474; &#9474; &#9474; &#9474;<span style="color: #656868;">;;</span><span style="color: #656868;">company           ; the ultimate code completion backend</span>
+&#9474; &#9474; &#9474; &#9474;<span style="color: #E18Cbb;">(</span>corfu +orderless<span style="color: #E18Cbb;">)</span>  <span style="color: #656868;">; </span><span style="color: #656868;">complete with cap(f), cape and a flying feather!</span>
+&#9474; &#9474; &#9474; &#9474;<span style="color: #656868;">;;</span><span style="color: #656868;">helm              ; the *other* search engine for love and life</span>
+&#9474; &#9474; &#9474; &#9474;<span style="color: #656868;">;;</span><span style="color: #656868;">ido               ; the other *other* search engine...</span>
+&#9474; &#9474; &#9474; &#9474;<span style="color: #656868;">;;</span><span style="color: #656868;">ivy               ; a search engine for love and life</span>
+&#9474; &#9474; &#9474; &#9474;vertico           <span style="color: #656868;">; </span><span style="color: #656868;">the search engine of the future</span>
+&#9474; &#9474; &#9474; &#9474;
+<span style="color: #656868;">; </span><span style="color: #656868;">&#27492;&#22788;&#30465;&#30053;&#26356;&#22810;&#20869;&#23481;</span>
+</pre>
+</div>
+
+<p>
+在这个文件中把你想要的插件取消注释 （删掉前面的分号），再在你的终端或者 Emacs 中运行一下 <code>doom sync</code> ，等它同步完成后，你的插件就安装好了，是不是很简单？
+</p>
+
+<p>
+Doom 预先配置好的插件可以参考： <a href="https://docs.doomemacs.org/latest/?#/modules/">Doom Emacs 的在线文档</a> / 或者在你的 Doom Emacs 中输入 <code>M-x doom/help</code> 打开
+</p>
+</div>
+</div>
+<div id="outline-container-org0f4f7dd" class="outline-4">
+<h4 id="org0f4f7dd"><span class="section-number-4">2.4.2.</span> packages.el</h4>
+<div class="outline-text-4" id="text-2-4-2">
+<p>
+如果你想装的插件不在 doom 的配置中，怎么办？
+</p>
+
+<p>
+没关系， doom 提供了一种非常简洁的方法配置安装。
+</p>
+
+<p>
+<b>Example:</b>
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #8AC6F2;">(</span><span style="color: #8AC6F2;">package!</span> verilog-ext<span style="color: #8AC6F2;">)</span>
+<span style="color: #8AC6F2;">(</span><span style="color: #8AC6F2;">package!</span> org-tree-slide<span style="color: #8AC6F2;">)</span>
+<span style="color: #8AC6F2;">(</span><span style="color: #8AC6F2;">package!</span> org-download<span style="color: #8AC6F2;">)</span>
+<span style="color: #656868;">;; </span><span style="color: #656868;">&#33509;&#25554;&#20214;&#24050;&#32463;&#22312; ELPA / MELPA &#28304;&#20013;&#65292;&#21487;&#20197;&#30452;&#25509;&#25351;&#23450;&#21517;&#31216;&#23433;&#35013;</span>
+</pre>
+</div>
+
+<p>
+与之前相同，更改完之后需要在终端 / Emacs 中运行 <code>doom sync</code> 使配置生效。
+</p>
+</div>
+</div>
+<div id="outline-container-orgeda17b1" class="outline-4">
+<h4 id="orgeda17b1"><span class="section-number-4">2.4.3.</span> config.el</h4>
+<div class="outline-text-4" id="text-2-4-3">
+<p>
+<b>Example:</b>
+</p>
+<div class="org-src-container">
+<pre class="src src-elisp"><span style="color: #8AC6F2;">(</span><span style="color: #8AC6F2;">setq</span> <span style="color: #BF93C3;">doom-font</span> <span style="color: #E18Cbb;">(</span><span style="color: #635770;">font-spec</span> <span style="color: #F28B86;">:family</span> <span style="color: #86B187;">"FiraCode Nerd Font"</span> <span style="color: #F28B86;">:size</span> <span style="color: #F6F3E8; font-weight: bold;">15</span><span style="color: #E18Cbb;">)</span><span style="color: #8AC6F2;">)</span>
+<span style="color: #656868;">;; </span><span style="color: #656868;">&#35774;&#32622; Doom &#30340;&#23383;&#20307;&#20026; FiraCode</span>
+<span style="color: #8AC6F2;">(</span><span style="color: #8AC6F2;">setq</span> <span style="color: #BF93C3;">doom-theme</span> <span style="color: #C7B299;">'</span><span style="color: #C7B299;">doom-badger</span><span style="color: #8AC6F2;">)</span>
+<span style="color: #656868;">;; </span><span style="color: #656868;">&#35774;&#32622; Doom &#30340;&#20027;&#39064;&#20026; doom-badger</span>
+<span style="color: #8AC6F2;">(</span><span style="color: #8AC6F2;">setq</span> <span style="color: #BF93C3;">display-line-numbers-type</span> t<span style="color: #8AC6F2;">)</span>
+<span style="color: #656868;">;; </span><span style="color: #656868;">&#35774;&#32622;&#34892;&#21495;&#26174;&#31034;</span>
+<span style="color: #8AC6F2;">(</span><span style="color: #8AC6F2;">setq</span> <span style="color: #BF93C3;">org-directory</span> <span style="color: #86B187;">"~/Documents/org/"</span><span style="color: #8AC6F2;">)</span>
+<span style="color: #656868;">;; </span><span style="color: #656868;">&#35774;&#32622;&#20320;&#24403;&#21069; org &#27169;&#24335;&#40664;&#35748;&#20648;&#23384;&#20320;&#30340;&#31508;&#35760;&#30340;&#20301;&#32622;</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org5f2e9a3" class="outline-2">
+<h2 id="org5f2e9a3"><span class="section-number-2">3.</span> Emacs 里的基本概念</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orga33921f" class="outline-3">
+<h3 id="orga33921f"><span class="section-number-3">3.1.</span> Emacs 的界面</h3>
+<div class="outline-text-3" id="text-3-1">
+</div>
+<div id="outline-container-orgfd4990e" class="outline-4">
+<h4 id="orgfd4990e"><span class="section-number-4">3.1.1.</span> 图片</h4>
+<div class="outline-text-4" id="text-3-1-1">
+
+<div id="org3e97671" class="figure">
+<p><img src="images/2024-11-30_13-00-21_screenshot.png" alt="2024-11-30_13-00-21_screenshot.png" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org68bd4a9" class="outline-4">
+<h4 id="org68bd4a9"><span class="section-number-4">3.1.2.</span> Buffer</h4>
+<div class="outline-text-4" id="text-3-1-2">
+<p>
+缓冲区是您编辑文件内容的地方。Buffer 临时保存文件的内容。写入缓冲区的任何内容都不会进入文件，除非您使用 save-buffer 命令显式保存它。
+</p>
+</div>
+</div>
+<div id="outline-container-org2769a99" class="outline-4">
+<h4 id="org2769a99"><span class="section-number-4">3.1.3.</span> Mini buffer</h4>
+<div class="outline-text-4" id="text-3-1-3">
+<p>
+顾名思义，是专门用于提示 Emacs 命令的 buffer，一般位于 Emacs 窗口的最底部。
+</p>
+</div>
+</div>
+<div id="outline-container-org7cad215" class="outline-4">
+<h4 id="org7cad215"><span class="section-number-4">3.1.4.</span> Frame</h4>
+<div class="outline-text-4" id="text-3-1-4">
+<p>
+Emacs 程序的主窗口，一般在一个 frame。
+</p>
+</div>
+</div>
+<div id="outline-container-orga9aadc7" class="outline-4">
+<h4 id="orga9aadc7"><span class="section-number-4">3.1.5.</span> Modeline</h4>
+<div class="outline-text-4" id="text-3-1-5">
+<p>
+位于 mini buffer 的上方，用于提示当前 Emacs 的状态和被编辑文件的一些信息。
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgab47504" class="outline-3">
+<h3 id="orgab47504"><span class="section-number-3">3.2.</span> Major-mode / Minor-mode</h3>
+<div class="outline-text-3" id="text-3-2">
+<ul class="org-ul">
+<li>特点
+<ul class="org-ul">
+<li><p>
+Major 模式为处理特定文件类型提供了专门的工具，例如编程语言的语法高亮显示。一个模式就对应着一组环境，不同模式可以分别进行配置，应对不同的场景。
+</p>
+
+<p>
+主要模式是互斥的;每个缓冲区在任何时候都有且只有一个 Major Mode。
+Emacs 捆绑了许多用于编辑不同语言源代码的主要模式：C、C++、Java、Lisp、bash、asm&#x2026;&#x2026;
+</p>
+
+<p>
+例如，当打开扩展名为 .c 的文件时，Emacs 会自动识别它是一个 C 文件，并选择 C major mode 以正确突出显示缓冲区。
+</p></li>
+<li><p>
+次要模式是可选功能，您可以打开或关闭这些功能，不一定特定于某种类型的文件或缓冲区。
+</p>
+
+<p>
+例如，“自动填充”模式是一种次要模式，在该模式下，SPC 会在您键入时在单词之间换行。Minor 模式彼此独立，也独立于所选的 Major 模式。
+</p></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9b5d2b2" class="outline-3">
+<h3 id="org9b5d2b2"><span class="section-number-3">3.3.</span> 快捷键约定</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+&lt;C-x&gt; -&gt; Ctrl + x
+</p>
+
+<p>
+&lt;M-x&gt; -&gt; Meta + x    # 调用宏
+</p>
+
+<p>
+特别的，在 Linux/macOS 系统的终端中，是可以使用部分 Emacs 快捷键的；
+</p>
+
+<p>
+在 macOS 系统中的各种文本编辑框，如备忘录、浏览器搜索框等等也都支持 Emacs 光标移动快捷键。因此可以说，掌握 Emacs 快捷键，在各种操作系统中都可以享受到其带来的方便快捷。
+</p>
+
+<blockquote>
+<p>
+Emacs 中有五个功能键： Control 、 Meta 、 Shift 、 Super 、 Hyper 。
+</p>
+
+<p>
+其中部分名称读者可能不熟悉，那是几十年前的键盘上的按键名称，其中的 Hyper 键更是在现代键盘上消失了。
+</p>
+
+<p>
+那 Meta 和 Super 又是什么呢？
+</p>
+<ul class="org-ul">
+<li>Meta 对应于普通 PC 键盘上的 Alt 键，Mac 电脑上的 Option 键。</li>
+<li><p>
+Super 对应 PC 键盘上的 Win 键，对应 Mac 电脑上的 Command 键。
+</p>
+
+<p>
+那么我们知道， Super 键在现代系统中起到了重要作用，因此 Emacs 平常不使用和 Super 键相关的快捷键，Emacs 的绝大多数快捷键都是使用 Control 和 Meta 键，而其中一大部分都是只使用 Control 键。
+</p></li>
+</ul>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-orge00c4d6" class="outline-3">
+<h3 id="orge00c4d6"><span class="section-number-3">3.4.</span> 常用快捷键</h3>
+<div class="outline-text-3" id="text-3-4">
+
+<div id="orge472833" class="figure">
+<p><img src="images/2024-11-29_21-23-08_screenshot.png" alt="2024-11-29_21-23-08_screenshot.png" />
+</p>
+</div>
+
+<p>
+注： 在 doom emacs 的 evil-mode 下，emacs 里的文本导航快捷键也都被绑定在了 vim 的快捷键下，所以就不再重复说明了。
+</p>
+
+<ul class="org-ul">
+<li>除此之外，emacs 有一些常用的操作快捷键：
+
+<ul class="org-ul">
+<li>&lt;C-x C-c&gt;    # 退出 Emacs</li>
+<li>&lt;C-x s&gt;      # 保存所有 buffer</li>
+<li>&lt;C-x C-s&gt;    # 保存当前 buffer 至文件  （保存）</li>
+<li>&lt;C-x C-w&gt;    # 将当前 buffer 另存为另一个文件  （另存为）</li>
+<li>&lt;C-x C-f&gt;    # 打开一个文件</li>
+
+<li><p>
+&lt;C-x b&gt;    # 列出当前所有的 buffer
+</p>
+
+<p>
+&lt;C-x k&gt;    # 删除一个指定的 buffer
+</p></li>
+
+<li><p>
+&lt;C-x 1&gt;    # 开启一个窗口
+</p>
+
+<p>
+&lt;C-x 2&gt;    # 在当前窗口下方打开一个窗口
+</p>
+
+<p>
+&lt;C-x 3&gt;    # 在当前窗口右方打开一个窗口
+</p>
+
+<p>
+&lt;C-x o&gt;    # 将光标移至另一个窗口
+</p></li>
+
+<li><p>
+&lt;C-x SPC&gt;    # 在当前光标位置设置一个标记 （在 evil-mode 下会自动进入 visual 模式）
+</p>
+
+<p>
+&lt;C-x C-x&gt;    # 在当前光标位置和上一个标记之间创建一个选择区间 （同理，在 evil-mode 下会自动创建 visual block）
+</p></li>
+
+<li><p>
+&lt;M-w&gt;    # 复制当前选中区域
+</p>
+
+<p>
+&lt;C-w&gt;    # 剪切当前选中区域  （在 evil-mode 中被重绑定到了 evil 的相关快捷键）
+</p>
+
+<p>
+&lt;C-y&gt;    # 粘贴之前复制的内容 （yank）
+</p>
+
+<blockquote>
+<p>
+Hint:在 emacs 中，yanking 指代的是粘贴，而在 vim 中，yanking 指代的是复制。
+</p>
+</blockquote>
+
+<p>
+Emacs 内部维护了一个环形“剪贴板历史”，当你想插入之前移除的内容时（即粘贴之前剪切的内容），按下 C-y ，这被称为 &ldquo;yank&rdquo;，它会将最近一次移除的内容插入回来。
+</p>
+
+<p>
+那么如何粘贴历史记录呢？在一次 &ldquo;yank&rdquo; 的基础上，再按 M-y ，就可以得到倒数第二次移除的内容，再按一次 M-y 即可得到倒数第三次移除的内容，以此类推。
+</p>
+
+<blockquote>
+<p>
+Hint：counsel 插件可以辅助这个过程。
+</p>
+</blockquote></li>
+
+<li><p>
+&lt;C-/&gt; / &lt;C-_&gt; / &lt;C-x u&gt;    # 撤销上一次操作
+</p>
+
+<p>
+&lt;C-g C-/&gt; / &lt;C-g C-_&gt; / &lt;C-g C-x u&gt;    # 重做上一次操作，即先按下 C-g，再按下撤销键，相当于撤销上一次撤销。与复制粘贴一样，Emacs 同样为我们维护了一个环形的撤销历史，当我们按下 C-g 的时候，相当于我们改变了当前撤销的方向，此时再进行撤销操作，就变成了重做。
+</p>
+
+<blockquote>
+<p>
+Hint：与剪贴板历史一样，undo-tree 插件可以辅助这个过程。
+</p>
+</blockquote></li>
+
+<li>&lt;C-s&gt;     # 向前搜索内容，再次按下 C-s 可以跳转至下一个目标</li>
+<li>&lt;C-r&gt;     # 向后搜索内容，再次按下 C-r 可以跳转至上一个目标</li>
+<li>&lt;C-M-s&gt;   # 按照正则表达式搜索</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd4efb11" class="outline-2">
+<h2 id="orgd4efb11"><span class="section-number-2">4.</span> Emacs 的杀手锏</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-orgdd6cb68" class="outline-3">
+<h3 id="orgdd6cb68"><span class="section-number-3">4.1.</span> Org-mode</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+Org mode 实际上是一种轻量级标记语言，与 RST、 Markdown 类似，不过要比这两者拥有更为强大的功能和特性，是众多 Emacs 用户重度依赖的一个插件。
+</p>
+
+<p>
+正如它的自我介绍所言， Org mode 与 RST 、 Markdown 相比，除了作为编辑环境以外，还可以进行任务管理、项目规划、笔记收集整理等各种操作
+</p>
+
+<p>
+—— 事实上由于 Org mode 作为 Emacs 的插件，构建在 emacs lisp 语言之上，也使得它具备了无与伦比的可扩展性，但同时由于有统一的开发团队进行维护，而使得其语法规则没有因为强大的可扩展性而导致不同方言的泛滥。
+</p>
+
+<p>
+需要说明的是，作为一个标记语言， Org mode 的基本语法规则其实是很简单的，但它同时还提供了大量的“功能”使得其变得异常强大，但这些功能都是构建在基本的语法规则之上的。
+</p>
+
+<p>
+对于初学者来说，Org mode 能够很快地上手，而在上手后又还有非常丰富的内容可待探索。
+</p>
+
+<ul class="org-ul">
+<li>以下是 Org mode 的几大特性:
+<ul class="org-ul">
+<li><b>基于大纲的编辑(outline-based editing)</b></li>
+<li>灵活强大的任务管理(planning)</li>
+<li>任务计时及统计(clocking)</li>
+<li>日程管理(agendas)</li>
+<li>快速捕获(capture)</li>
+<li>功能丰富的表格操作(tables)</li>
+<li>导出到多种外部格式(exporting)</li>
+<li><b>文学编程(working with source code)</b></li>
+<li>移动端支持(with your mobile phone)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgad5205d" class="outline-3">
+<h3 id="orgad5205d"><span class="section-number-3">4.2.</span> Magit, verilog-mode &#x2026;</h3>
+</div>
+</div>
+<div id="outline-container-org2d68dfd" class="outline-2">
+<h2 id="org2d68dfd"><span class="section-number-2">5.</span> 进一步学习？</h2>
+<div class="outline-text-2" id="text-5">
+<ul class="org-ul">
+<li>一些可以参考的资料
+<ul class="org-ul">
+<li>Doom Emacs 帮助  SPC-h d h</li>
+<li><a href="https://pavinberg.github.io/emacs-book/zh/">专业 Emacs 入门</a></li>
+<li><a href="https://book.emacs-china.org/#org850ce0c">21 天学会 Emacs</a></li>
+<li><a href="https://tuhdo.github.io/emacs-tutor.html">Emacs mini tutorial</a></li>
+<li><a href="https://soulhacker.me/posts/doom-emacs-config/">Doom Emacs 配置</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2024-12-01 Sun 11:39</p>
+</div>
+</body>
+</html>
