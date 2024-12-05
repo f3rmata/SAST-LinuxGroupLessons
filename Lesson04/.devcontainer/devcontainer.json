@@ -1,0 +1,14 @@
+{
+  "name": "SAST-LinuxGroupLessons",
+  "image": "node:20",
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "extensions": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ],
+  "postCreateCommand": "npm install",
+  "forwardPorts": [3030],
+  "remoteUser": "node"
+}
