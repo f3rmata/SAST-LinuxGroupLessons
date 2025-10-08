@@ -1,11 +1,16 @@
-# Welcome to [Slidev](https://github.com/slidevjs/slidev)!
+# Lesson02 幻灯片（Slidev）
 
-To start the slide show:
-
+运行：
 - `npm install`
 - `npm run dev`
-- visit <http://localhost:3030>
+- 浏览器访问 <http://localhost:3030>
 
-Edit the [slides.md](./slides.md) to see the changes.
+构建/导出：
+- `npm run build` 生成静态站点
+- `npm run export` 导出 PDF（如遇到导出失败，可安装 dev 依赖 `playwright-chromium`）
 
-Learn more about Slidev at the [documentation](https://sli.dev/).
+主要文件：
+- [slides.md](./slides.md)
+- 资源在 `public/`，组件在 `components/`
+
+了解 Slidev：<https://sli.dev/>

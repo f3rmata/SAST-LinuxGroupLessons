@@ -1,11 +1,16 @@
-# Welcome to [Slidev](https://github.com/slidevjs/slidev)!
+# Git101 幻灯片（Slidev）
 
-To start the slide show:
-
+运行：
 - `npm install`
 - `npm run dev`
-- visit <http://localhost:3030>
+- 访问 <http://localhost:3030>
 
-Edit the [slides.md](./slides.md) to see the changes.
+构建/导出：
+- `npm run build`
+- `npm run export`（本项目已包含 `playwright-chromium` 依赖，便于导出 PDF）
+- 导出产物示例：`slides-export.pdf`
 
-Learn more about Slidev at the [documentation](https://sli.dev/).
+入口：
+- [slides.md](./slides.md)
+
+更多资料见仓库根目录与 docs/。
